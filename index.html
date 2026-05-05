@@ -1,0 +1,1547 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail Intranet - Dashboard Complet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-dark: #7da4ab;
+            --secondary-dark: #197283;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --accent-blue: #c2d1d3;
+            --hover-shadow: 0 20px 40px rgba(16, 42, 84, 0.15);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 20%, rgba(16, 42, 84, 0.03), transparent 40%),
+                        radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.02), transparent 40%);
+            animation: moveBg 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBg {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(-5%, -5%); }
+            100% { transform: translate(0,0); }
+        }
+.hero-image {
+    width: 100%;
+    height: 250px; /* tu peux changer */
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ✅ remplit sans déformation */
+    display: block;
+}
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(8, 20, 47, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header h1 {
+            color: var(--white);
+            font-size: 2.25rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header2 {
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(8, 20, 47, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header2 h1 {
+            color: var(--white);
+            font-size: 2.25rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header2 p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== CONTAINER PRINCIPAL ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ===== MÉTÉO SECTION ===== */
+        .weather-section {
+            margin-bottom: 2rem;
+        }
+
+        .today {
+            background: linear-gradient(135deg, #7da4ab, #167384);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .location {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .date {
+            font-size: 13px;
+            opacity: 0.7;
+            color: white;
+        }
+
+        .main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .temp {
+            font-size: 70px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .icon {
+            font-size: 70px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .desc {
+            opacity: 0.8;
+            margin-top: 5px;
+            color: white;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.08);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .box h4 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .box p {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .forecast {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 1.5rem;
+        }
+
+        .day {
+            background: linear-gradient(135deg, #197283, #7da4ab);
+            padding: 22px;
+            border-radius: 18px;
+            text-align: center;
+            transition: 0.3s;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .day:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(135deg, #7da4ab, #197283);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .day h4 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .day div {
+            font-size: 30px !important;
+        }
+
+        .day p {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* ===== APPLICATIONS SECTION ===== */
+        .apps-section {
+            margin-bottom: 2rem;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+        }
+
+        .app-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(16, 42, 84, 0.08);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .app-card:nth-child(1) { animation-delay: 0.05s; }
+        .app-card:nth-child(2) { animation-delay: 0.1s; }
+        .app-card:nth-child(3) { animation-delay: 0.15s; }
+        .app-card:nth-child(4) { animation-delay: 0.2s; }
+        .app-card:nth-child(5) { animation-delay: 0.25s; }
+        .app-card:nth-child(6) { animation-delay: 0.3s; }
+
+        .app-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .app-icon-wrap {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-blue) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 42, 84, 0.2);
+        }
+
+        .app-card:hover .app-icon-wrap {
+            transform: scale(1.08) rotate(4deg);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+        }
+
+        .app-label {
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* ===== MENU NAVIGATION ===== */
+        .menu-section {
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(16, 42, 84, 0.08);
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-dark) 0%, var(--accent-blue) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .menu-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-blue) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(16, 42, 84, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .card-arrow {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 42, 84, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .card-arrow svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary-dark);
+            stroke-width: 2.5;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover .card-arrow {
+            background: var(--primary-dark);
+        }
+
+        .menu-card:hover .card-arrow svg {
+            stroke: var(--white);
+            transform: translateX(3px);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-title {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+            line-height: 1.4;
+        }
+
+        .card-number {
+            color: var(--accent-blue);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-top: 0.75rem;
+            opacity: 0.9;
+        }
+/* ===== LOGO ITANIS ===== */
+.logo {
+    height: 60px;           /* taille du logo */
+    width: auto;            /* garder les proportions */
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px;    /* centré + espace en bas */
+    transition: transform 0.3s ease;
+}
+
+.icon-documentation::before { content: '📚'; }
+.icon-client::before { content: '👤'; }
+
+.icon-cabinet-tunisie::before { content: '🏢'; }
+
+.icon-cabinet-france::before { content: '🏢'; }
+
+.icon-dossier::before { content: '📁'; }
+
+.icon-assistante::before { content: '👩‍💼'; }
+
+.icon-commissariat::before { content: '📊'; }
+
+.icon-tenue::before { content: '📘'; }
+
+.icon-assistance::before { content: '🤝'; }
+
+.icon-mission-speciale::before { content: '🚀'; }
+
+.icon-expertise::before { content: '⚖️'; }
+
+.icon-mission-ci::before { content: '🔍'; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .menu-card:nth-child(1) { animation-delay: 0.1s; }
+        .menu-card:nth-child(2) { animation-delay: 0.15s; }
+        .menu-card:nth-child(3) { animation-delay: 0.2s; }
+        .menu-card:nth-child(4) { animation-delay: 0.25s; }
+        .menu-card:nth-child(5) { animation-delay: 0.3s; }
+        .menu-card:nth-child(6) { animation-delay: 0.35s; }
+        .menu-card:nth-child(7) { animation-delay: 0.4s; }
+        .menu-card:nth-child(8) { animation-delay: 0.45s; }
+
+        .menu-card:focus {
+            outline: 3px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+
+        /* ===== PORTAIL LOGOS ===== */
+        .portal-section {
+            margin-top: 60px;
+            padding: 20px;
+        }
+
+        .portal-title {
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+        }
+
+        .portal-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .portal-card img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .portal-card span {
+            display: block;
+            font-size: 0px;
+            opacity: 0.8;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            .forecast {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 2rem 1.5rem; }
+            .header h1 { font-size: 1.75rem; }
+            .header p { font-size: 0.9rem; }
+            .main-container { height: 100%; padding: 1.5rem; }
+            .today { padding: 20px; }
+            .temp { font-size: 50px; }
+            .icon { font-size: 50px; }
+            .details { grid-template-columns: repeat(2, 1fr); }
+            .forecast { grid-template-columns: repeat(2, 1fr); }
+            .menu-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            .menu-card { padding: 1.5rem; }
+            .card-title { font-size: 1.125rem; }
+            .apps-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.5rem; }
+            .main-container  {  min-height: 100%;  /* ✅ au lieu de height: 100% */
+        padding: 1.5rem;  }
+            .temp { font-size: 40px; }
+            .icon { font-size: 40px; }
+            .menu-card { padding: 1.25rem; }
+            .card-icon { width: 40px; height: 40px; font-size: 1.25rem; }
+            .day { padding: 15px; min-height: 120px; }
+            .day div { font-size: 24px !important; }
+            .apps-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ===== SECTION DOCUMENTS ===== */
+.docs-section {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.docs-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.docs-stat-card {
+    background: var(--white);
+    border: 1px solid rgba(125, 164, 171, 0.25);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.docs-stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+
+.docs-stat-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--secondary-dark);
+    letter-spacing: -1px;
+}
+
+.docs-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.docs-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: 1px solid rgba(125, 164, 171, 0.4);
+    border-radius: 10px;
+    padding: 0 14px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.docs-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--text-primary);
+    padding: 10px 0;
+    outline: none;
+}
+
+.docs-search input::placeholder {
+    color: #b0bec5;
+}
+
+.docs-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.docs-pill {
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(125, 164, 171, 0.35);
+    background: var(--white);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 400;
+}
+
+.docs-pill.active {
+    background: linear-gradient(135deg, #7da4ab, #197283);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 3px 10px rgba(25, 114, 131, 0.3);
+}
+
+.docs-pill:hover:not(.active) {
+    background: rgba(125, 164, 171, 0.1);
+    border-color: #7da4ab;
+    color: var(--secondary-dark);
+}
+
+.docs-table-wrap {
+    background: var(--white);
+    border: 1px solid rgba(125, 164, 171, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+.docs-table-head {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1.2fr 0.7fr 80px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(125,164,171,0.12), rgba(25,114,131,0.08));
+    border-bottom: 1px solid rgba(125, 164, 171, 0.2);
+}
+
+.docs-table-head span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--secondary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.docs-row {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1.2fr 0.7fr 80px;
+    padding: 13px 20px;
+    border-bottom: 1px solid rgba(125, 164, 171, 0.1);
+    align-items: center;
+    transition: background 0.15s ease;
+    cursor: pointer;
+}
+
+.docs-row:last-child {
+    border-bottom: none;
+}
+
+.docs-row:hover {
+    background: rgba(125, 164, 171, 0.06);
+}
+
+.docs-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.docs-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+.docs-icon.pdf  { background: rgba(217,83,48,0.12);  color: #993C1D; }
+.docs-icon.xlsx { background: rgba(99,153,34,0.12);  color: #3B6D11; }
+.docs-icon.docx { background: rgba(24,95,165,0.12);  color: #185FA5; }
+.docs-icon.pptx { background: rgba(186,117,23,0.12); color: #854F0B; }
+.docs-icon.other{ background: rgba(125,164,171,0.15); color: #197283; }
+
+.docs-file-name {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+}
+
+.docs-cell {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+}
+
+.docs-type-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.docs-type-badge.pdf  { background: rgba(217,83,48,0.1);  color: #993C1D; }
+.docs-type-badge.xlsx { background: rgba(99,153,34,0.1);  color: #3B6D11; }
+.docs-type-badge.docx { background: rgba(24,95,165,0.1);  color: #185FA5; }
+.docs-type-badge.pptx { background: rgba(186,117,23,0.1); color: #854F0B; }
+.docs-type-badge.other{ background: rgba(125,164,171,0.15); color: #197283; }
+
+.docs-open-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: var(--secondary-dark);
+    background: rgba(125, 164, 171, 0.12);
+    border: 1px solid rgba(125, 164, 171, 0.3);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.docs-open-btn:hover {
+    background: linear-gradient(135deg, #7da4ab, #197283);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 3px 10px rgba(25,114,131,0.3);
+}
+
+.docs-empty {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.docs-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-top: 1px solid rgba(125, 164, 171, 0.15);
+    background: rgba(125,164,171,0.03);
+}
+
+.docs-page-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.docs-page-btns {
+    display: flex;
+    gap: 4px;
+}
+
+.docs-page-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(125,164,171,0.3);
+    background: transparent;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.docs-page-btn.active {
+    background: linear-gradient(135deg, #7da4ab, #197283);
+    color: white;
+    border-color: transparent;
+}
+
+.docs-page-btn:hover:not(.active) {
+    background: rgba(125,164,171,0.12);
+    color: var(--secondary-dark);
+}
+
+@media (max-width: 768px) {
+    .docs-stats { grid-template-columns: repeat(2, 1fr); }
+    .docs-table-head,
+    .docs-row { grid-template-columns: 2fr 1fr 80px; }
+    .docs-table-head span:nth-child(2),
+    .docs-row .docs-cell:nth-child(2),
+    .docs-table-head span:nth-child(4),
+    .docs-row .docs-cell:nth-child(4) { display: none; }
+}
+
+@media (max-width: 480px) {
+    .docs-stats { grid-template-columns: 1fr; }
+    .docs-toolbar { flex-direction: column; align-items: stretch; }
+}
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+
+      <div class="hero-image">
+    <img src="template-SharePoint-CCA.png" alt="Bannière">
+</div>
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Portail Intranet</h1>
+            <p>Accédez rapidement à tous vos services et ressources d'entreprise</p>
+        </header>
+
+        <!-- ===== SECTION APPLICATIONS ===== -->
+        <div class="apps-section">
+            <h2 class="section-title">Applications</h2>
+            <div class="apps-grid">
+
+                <!-- ERP -->
+                <div class="app-card" data-url="https://apps.powerapps.com/play/e/default-5528e550-b1f6-45c2-b0dc-eb46df5b3e99/a/5657189c-326d-4071-9aed-7c67983570e3?tenantId=5528e550-b1f6-45c2-b0dc-eb46df5b3e99&hint=3821cc0e-5e33-4de2-975c-4f2031de68f3&sourcetime=1749569147243" tabindex="0" role="button" aria-label="ERP">
+                    <div class="app-icon-wrap">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="7" height="7" rx="1"/>
+                            <rect x="15" y="3" width="7" height="7" rx="1"/>
+                            <rect x="2" y="14" width="7" height="7" rx="1"/>
+                            <rect x="15" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                    </div>
+                    <span class="app-label">ERP</span>
+                </div>
+        </div>
+
+</div>
+
+        <!-- ===== SECTION MENU NAVIGATION ===== -->
+        <div class="menu-section">
+            <h2 class="section-title">Dossier de travail clients</h2>
+            <div class="menu-grid">
+
+                <!-- Client -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Lists/Clients/AllItems.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module client">
+                    <div class="card-header">
+                        <div class="card-icon icon-client"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">I</div>
+                        <h2 class="card-title">Client</h2>
+                        <p class="card-description">Gestion de la relation client et développement commercial</p>
+                    </div>
+                </div>
+ <!-- Cabinet Tunisie -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Cabinettunisie/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Gestion">
+                    <div class="card-header">
+                        <div class="card-icon icon-cabinet-tunisie"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">II</div>
+                        <h2 class="card-title">Cabinet Tunisie</h2>
+                        <p class="card-description">Pilotage des activités et gestion opérationnelle locale</p>
+                    </div>
+                </div>
+ <!-- Cabinet France -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Cabinetfrance/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Gestion">
+                    <div class="card-header">
+                        <div class="card-icon icon-cabinet-france"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">III</div>
+                        <h2 class="card-title">Cabinet France</h2>
+                        <p class="card-description">Suivi des opérations et conformité du cabinet en France</p>
+                    </div>
+                </div>
+                <!-- Dossier cabinet -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Dossier%20Cabinet/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Documentation">
+                    <div class="card-header">
+                        <div class="card-icon icon-dossier"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">IV</div>
+                        <h2 class="card-title">Dossier cabinet</h2>
+                        <p class="card-description">Organisation et centralisation des dossiers internes</p>
+                    </div>
+                </div>
+<!-- Documentation -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Documentation/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Documentation">
+                    <div class="card-header">
+                        <div class="card-icon icon-documentation"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">V</div>
+                        <h2 class="card-title">Documentation</h2>
+                        <p class="card-description">Référentiel documentaire et procédures internes</p>
+                    </div>
+                </div>
+                <!-- Assistante cabinet -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Assistante%20Cabinet/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Gestion">
+                    <div class="card-header">
+                        <div class="card-icon icon-assistante"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">VI</div>
+                        <h2 class="card-title">Assistante cabinet</h2>
+                        <p class="card-description">Support administratif et coordination des tâches</p>
+                    </div>
+                </div>
+<!-- Commissariat Aux Comptes -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Commissariat%20Aux%20Comptes/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module RH">
+                    <div class="card-header">
+                        <div class="card-icon icon-commissariat"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">VII</div>
+                        <h2 class="card-title">Commissariat Aux Comptes</h2>
+                        <p class="card-description">Audit légal et certification des comptes</p>
+                    </div>
+                </div>
+                <!-- Tenue comptable -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Tenue%20Comptable/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Juridique">
+                    <div class="card-header">
+                       <div class="card-icon icon-tenue"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">VIII</div>
+                        <h2 class="card-title">Tenue comptable</h2>
+                        <p class="card-description">Gestion des écritures et suivi comptable quotidien</p>
+                    </div>
+                </div>
+
+
+                <!-- Assistance comptable -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Assistance%20Comptable/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder aux modèles de travail">
+                    <div class="card-header">
+                        <div class="card-icon icon-assistance"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">IX</div>
+                        <h2 class="card-title">Assistance comptable</h2>
+                        <p class="card-description">Accompagnement et conseil en gestion comptable</p>
+                    </div>
+                </div>
+
+               
+
+                <!-- Mission spéciale -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Mission%20Sp%C3%A9ciale/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Commercial & Marketing">
+                    <div class="card-header">
+                        <div class="card-icon icon-mission-speciale"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">X</div>
+                        <h2 class="card-title">Mission spéciale</h2>
+                        <p class="card-description">Gestion des missions exceptionnelles et projets spécifiques</p>
+                    </div>
+                </div>
+
+                
+
+                <!-- Expertise Judiciaire -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Expertise%20Judiciaire/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module Qualité">
+                    <div class="card-header">
+                        <div class="card-icon icon-expertise"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">XI</div>
+                        <h2 class="card-title">Expertise Judiciaire</h2>
+                        <p class="card-description">Interventions légales et expertise auprès des tribunaux</p>
+                    </div>
+                </div>
+
+                <!-- Mission CI -->
+                <div class="menu-card" data-url="https://ccaexpertisetn.sharepoint.com/Mission%20CI/SitePages/Home.aspx"
+                     tabindex="0" role="button" aria-label="Accéder au module IT">
+                    <div class="card-header">
+                        <div class="card-icon icon-mission-ci"></div>
+                        <div class="card-arrow">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">XII</div>
+                        <h2 class="card-title">Mission CI</h2>
+                        <p class="card-description">Contrôle interne et gestion des risques</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PORTAIL LOGOS ===== -->
+        <div class="portal-section">
+            <h2 class="portal-title">Lien vers les sites administratifs</h2>
+            <div class="portal-grid">
+
+                <div class="portal-card" data-url="https://www.tunisieindustrie.nat.tn/fr/doc.asp?docid=753&mcat=22&mrub=178">
+                    <img src='WhatsApp-Image-2025-03-18-à-11.12.04_efc0f9db.jpg' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://jibaya.tn/">
+                    <img src='WhatsApp-Image-2025-03-18-à-.jpg' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://www.cnss.tn/fr/">
+                    <img src='ss.jpg' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://www.emploi.nat.tn/fo/Fr/global.php">
+                    <img src='WhatsApp-Image-2025-03-18-à- (3).jpg' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://www.apia.com.tn/">
+                    <img src='WhatsApp-Image-2025-03-18-à-11.01.21_d28.jpg' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://juridoc.tn/">
+                    <img src='WhatsApp-Image-2025-03-18-à.jpg' alt="">
+                </div>
+
+                <div class="portal-card" data-url="http://www.iort.gov.tn/WD120AWP/WD120Awp.exe/CONNECT/SITEIORT">
+                    <img src='WhatsApp-Image-2025-03-18-à- (2).jpg' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://www.douane.gov.tn/">
+                    <img src='OIP.webp' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://www.bct.gov.tn/bct/siteprod/index.jsp">
+                    <img src='OIP (1).webp' alt="">
+                </div>
+
+                <div class="portal-card" data-url="https://www.registre-entreprises.tn/rne-public/#/">
+                    <img src='RNE-1024x556.jpg' alt="">
+                </div>
+                
+ <div class="portal-card" data-url="https://login-tej.finances.gov.tn/realms/seif/protocol/openid-connect/auth?client_id=seif-app&redirect_uri=https%3A%2F%2Ftej.finances.gov.tn%2F&state=bddd685a-7a34-4951-9fc4-6c70712d83e4&response_mode=fragment&response_type=code&scope=openid&nonce=ef138c66-e3f2-4c65-8acb-274bb75e79fb">
+                    <img src='logo-tej.jpg' alt="">
+                </div>
+                 <div class="portal-card" data-url="https://adhesion.elfatoora.tn/home">
+                    <img src='ttn-logo.png' alt="">
+                </div>
+                
+            </div>
+        <!-- ===== SECTION LISTE DOCUMENTS ===== -->
+<div class="docs-section">
+    <h2 class="section-title">Documents SharePoint</h2>
+
+    <div class="docs-stats">
+        <div class="docs-stat-card">
+            <div class="docs-stat-label">Total documents</div>
+            <div class="docs-stat-value" id="doc-total">—</div>
+        </div>
+        <div class="docs-stat-card">
+            <div class="docs-stat-label">Modifiés cette semaine</div>
+            <div class="docs-stat-value" id="doc-recent">—</div>
+        </div>
+        <div class="docs-stat-card">
+            <div class="docs-stat-label">Bibliothèque</div>
+            <div class="docs-stat-value" style="font-size:14px;">Documents</div>
+        </div>
+    </div>
+
+    <div class="docs-toolbar">
+        <div class="docs-search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7da4ab" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="doc-search" placeholder="Rechercher un document..." oninput="filterDocuments()">
+        </div>
+        <div class="docs-filters">
+            <span class="docs-pill active" onclick="setDocFilter(this,'Tous')">Tous</span>
+            <span class="docs-pill" onclick="setDocFilter(this,'pdf')">PDF</span>
+            <span class="docs-pill" onclick="setDocFilter(this,'docx')">Word</span>
+            <span class="docs-pill" onclick="setDocFilter(this,'xlsx')">Excel</span>
+            <span class="docs-pill" onclick="setDocFilter(this,'pptx')">PowerPoint</span>
+        </div>
+    </div>
+
+    <div class="docs-table-wrap">
+        <div class="docs-table-head">
+            <span>Nom du document</span>
+            <span>Modifié par</span>
+            <span>Date de modification</span>
+            <span>Type</span>
+            <span>Action</span>
+        </div>
+        <div id="docs-list-body"></div>
+        <div class="docs-pagination">
+            <span class="docs-page-info" id="doc-page-info"></span>
+            <div class="docs-page-btns" id="doc-page-btns"></div>
+        </div>
+    </div>
+</div>
+   </div>
+        <header class="header2">
+            <div class="header2-content">
+                <img src='Logo_ITANIS_FN-2500.png' alt="Logo ITANIS" class="logo">
+                <p>Powered by ITANIS © 2026</p>
+            </div>
+        </header>
+
+    </div>
+
+    <script>
+
+
+        function getWeather(lat, lon) {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${API_KEY}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("city").innerText = data.name + ", " + data.sys.country;
+                    document.getElementById("temp").innerText = Math.round(data.main.temp) + "°";
+                    document.getElementById("desc").innerText = data.weather[0].description;
+                    document.getElementById("icon").innerText = getIcon(data.weather[0].main);
+                    document.getElementById("feels").innerText = Math.round(data.main.feels_like) + "°";
+                    document.getElementById("humidity").innerText = data.main.humidity + "%";
+                    document.getElementById("wind").innerText = Math.round(data.wind.speed * 3.6) + " km/h";
+                    document.getElementById("pressure").innerText = data.main.pressure + " hPa";
+                });
+        }
+
+        function getForecast(lat, lon) {
+            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${API_KEY}`)
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById("forecast");
+                    container.innerHTML = "";
+                    const daily = data.list.filter((item, index) => index % 8 === 0);
+                    daily.slice(0, 5).forEach(d => {
+                        const date = new Date(d.dt_txt);
+                        container.innerHTML += `
+                            <div class="day">
+                                <h4>${date.toLocaleDateString("fr-FR", {weekday:"short"})}</h4>
+                                <div>${getIcon(d.weather[0].main)}</div>
+                                <p>${Math.round(d.main.temp)}°</p>
+                            </div>
+                        `;
+                    });
+                });
+        }
+
+        navigator.geolocation.getCurrentPosition(pos => {
+            getWeather(pos.coords.latitude, pos.coords.longitude);
+            getForecast(pos.coords.latitude, pos.coords.longitude);
+        }, () => {
+            getWeather(36.8065, 10.1815);
+            getForecast(36.8065, 10.1815);
+        });
+
+        // Clics menu-card
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+               if (url) {
+            window.open(url, '_blank'); // même onglet
+        }
+            });
+            card.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const url = this.getAttribute('data-url');
+                    if (url) window.open(url, '_blank');
+                }
+            });
+        });
+
+        // Clics portal-card
+        document.querySelectorAll('.portal-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                if (url) window.open(url, '_blank');
+            });
+        });
+
+        // Clics app-card
+        document.querySelectorAll('.app-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                if (url) window.open(url, '_blank');
+            });
+            card.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const url = this.getAttribute('data-url');
+                    if (url) window.open(url, '_blank');
+                }
+            });
+        });
+
+        // ===== DOCUMENTS SHAREPOINT =====
+const SHAREPOINT_SITE = "https://ccaexpertisetn.sharepoint.com";
+const LIBRARY_NAME = "Shared Documents"; // ⚠️ nom exact !
+const DOCS_PER_PAGE = 8;
+
+let allDocs = [];
+let filteredDocs = [];
+let currentPage = 1;
+let activeDocFilter = 'Tous';
+
+function getDocExt(filename) {
+    if (!filename) return 'other';
+    const ext = filename.split('.').pop().toLowerCase();
+    return ['pdf','xlsx','xls','docx','doc','pptx','ppt'].includes(ext)
+        ? (ext === 'xls' ? 'xlsx' : ext === 'doc' ? 'docx' : ext === 'ppt' ? 'pptx' : ext)
+        : 'other';
+}
+
+function formatDocDate(dateStr) {
+    if (!dateStr) return '—';
+    return new Date(dateStr).toLocaleDateString('fr-FR', {
+        day: '2-digit', month: 'short', year: 'numeric'
+    });
+}
+
+function isThisWeek(dateStr) {
+    if (!dateStr) return false;
+    const d = new Date(dateStr);
+    const now = new Date();
+    const diff = (now - d) / (1000 * 60 * 60 * 24);
+    return diff <= 7;
+}
+
+function renderDocs() {
+    const body = document.getElementById('docs-list-body');
+    const start = (currentPage - 1) * DOCS_PER_PAGE;
+    const page = filteredDocs.slice(start, start + DOCS_PER_PAGE);
+
+    if (!page.length) {
+        body.innerHTML = '<div class="docs-empty">Aucun document trouvé.</div>';
+        document.getElementById('doc-page-info').textContent = '';
+        document.getElementById('doc-page-btns').innerHTML = '';
+        return;
+    }
+
+    body.innerHTML = page.map(doc => {
+        const ext = getDocExt(doc.FileLeafRef);
+        const label = ext === 'other' ? 'FILE' : ext.toUpperCase();
+        const url = `${SHAREPOINT_SITE}${doc.FileRef}`;
+        const author = doc.Editor ? doc.Editor.Title : (doc.Author ? doc.Author.Title : '—');
+        return `
+        <div class="docs-row" onclick="window.open('${url}','_blank')">
+            <div class="docs-name-cell">
+                <div class="docs-icon ${ext}">${label}</div>
+                <span class="docs-file-name" title="${doc.FileLeafRef}">${doc.FileLeafRef}</span>
+            </div>
+            <span class="docs-cell">${author}</span>
+            <span class="docs-cell">${formatDocDate(doc.Modified)}</span>
+            <span class="docs-cell"><span class="docs-type-badge ${ext}">${label}</span></span>
+            <a class="docs-open-btn" href="${url}" target="_blank" onclick="event.stopPropagation()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Ouvrir
+            </a>
+        </div>`;
+    }).join('');
+
+    const total = filteredDocs.length;
+    const totalPages = Math.ceil(total / DOCS_PER_PAGE);
+    document.getElementById('doc-page-info').textContent =
+        `${start + 1}–${Math.min(start + DOCS_PER_PAGE, total)} sur ${total} document${total > 1 ? 's' : ''}`;
+
+    const btns = document.getElementById('doc-page-btns');
+    btns.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+        btns.innerHTML += `<button class="docs-page-btn ${i === currentPage ? 'active' : ''}" onclick="goDocPage(${i})">${i}</button>`;
+    }
+}
+
+function goDocPage(p) {
+    currentPage = p;
+    renderDocs();
+}
+
+function filterDocuments() {
+    const q = document.getElementById('doc-search').value.toLowerCase();
+    filteredDocs = allDocs.filter(d => {
+        const name = (d.FileLeafRef || '').toLowerCase();
+        const ext = getDocExt(d.FileLeafRef);
+        const matchFilter = activeDocFilter === 'Tous' || ext === activeDocFilter;
+        const matchSearch = !q || name.includes(q);
+        return matchFilter && matchSearch;
+    });
+    currentPage = 1;
+    renderDocs();
+}
+
+function setDocFilter(el, f) {
+    document.querySelectorAll('.docs-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    activeDocFilter = f;
+    filterDocuments();
+}
+
+function loadSharePointDocs() {
+
+    const url = `${SHAREPOINT_SITE}/_api/web/lists/getbytitle('${LIBRARY_NAME}')/items?$select=FileLeafRef,FileRef,Modified,Editor/Title,Author/Title&$expand=Editor,Author&$orderby=Modified desc&$top=100`;
+
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json;odata=verbose"
+        },
+        credentials: "include" // 🔥 IMPORTANT pour SharePoint
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        allDocs = data.d.results || [];
+        filteredDocs = [...allDocs];
+
+        const recent = allDocs.filter(d => isThisWeek(d.Modified)).length;
+
+        document.getElementById('doc-total').textContent = allDocs.length;
+        document.getElementById('doc-recent').textContent = recent;
+
+        renderDocs();
+    })
+    .catch(err => {
+        console.error("Erreur SharePoint :", err);
+
+        document.getElementById('docs-list-body').innerHTML =
+            "<div class='docs-empty'>Impossible de charger les documents</div>";
+    });
+}
+
+loadSharePointDocs();
+    </script>
